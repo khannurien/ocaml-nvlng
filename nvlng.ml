@@ -1,6 +1,4 @@
-open List;;
-
-let novNew = "Mesdames, messieurs,";;
+let novNew = ["Mesdames, messieurs,"];;
 
 let nov1 = [
         "Je reste fondamentalement persuadé que,";
@@ -44,3 +42,21 @@ let nov4 = [
         "d'un programme plus humain, plus fraternel et plus juste.";
         "d'un projet porteur de véritables espoirs, notamment pour les plus démuni-es."
 ];;
+
+let randList l =
+        List.nth l (Random.int (List.length l))
+;;
+
+let printList l =
+        List.iter (Printf.printf "%s ") l
+;;
+
+let startNov () = [randList novNew; randList nov2; randList nov3; randList nov4];;
+let moreNov () = [randList nov1; randList nov2; randList nov3; randList nov4];;
+
+let rec makeNov = function
+        | 0 -> (startNov ())
+        | n -> (makeNov (n-1))@(moreNov ())
+;;
+
+let printNov n = printList (makeNov n);;
